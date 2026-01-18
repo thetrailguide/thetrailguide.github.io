@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Emergence Project | Building New Trails for Emotional Regulation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1F3A52 0%, #2d5570 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            color: #A89574;
+        }
+        
+        .hero h2 {
+            font-size: 1.8em;
+            font-weight: 300;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+        
+        .hero p {
+            font-size: 1.2em;
+            max-width: 700px;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+        
+        .cta-button {
+            background: #A89574;
+            color: white;
+            padding: 18px 40px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .cta-button:hover {
+            background: #96835f;
+            transform: translateY(-2px);
+        }
+        
+        /* About Section */
+        .about {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .about h3 {
+            font-size: 2.5em;
+            color: #1F3A52;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .about p {
+            font-size: 1.15em;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .quote {
+            background: #f9f9f9;
+            border-left: 4px solid #A89574;
+            padding: 25px;
+            margin: 40px 0;
+            font-style: italic;
+            font-size: 1.2em;
+            color: #1F3A52;
+        }
+        
+        /* Resources Section */
+        .resources {
+            background: #f5f5f5;
+            padding: 80px 20px;
+        }
+        
+        .resources h3 {
+            font-size: 2.5em;
+            color: #1F3A52;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .resource-card {
+            background: white;
+            padding: 35px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-top: 4px solid #A89574;
+        }
+        
+        .resource-card h4 {
+            font-size: 1.8em;
+            color: #1F3A52;
+            margin-bottom: 15px;
+        }
+        
+        .resource-card p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+        
+        .resource-link {
+            color: #1F3A52;
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 2px solid #A89574;
+            padding-bottom: 2px;
+            transition: all 0.3s;
+        }
+        
+        .resource-link:hover {
+            color: #A89574;
+        }
+        
+        /* Who This Is For Section */
+        .for-who {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .for-who h3 {
+            font-size: 2.5em;
+            color: #1F3A52;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .for-who ul {
+            list-style: none;
+            font-size: 1.15em;
+            color: #555;
+        }
+        
+        .for-who li {
+            padding: 12px 0 12px 35px;
+            position: relative;
+        }
+        
+        .for-who li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #A89574;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1F3A52;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        footer p {
+            margin-bottom: 10px;
+        }
+        
+        footer a {
+            color: #A89574;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            margin: 0 15px;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>THE EMERGENCE PROJECT</h1>
+        <h2>Building New Trails for Emotional Regulation</h2>
+        <p>Your discomfort = danger response is a well-worn highway moving too fast to change. So we're building NEW trails. New responses. New possibilities.</p>
+        <a href="#resources" class="cta-button">START YOUR JOURNEY</a>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <h3>Why New Trails?</h3>
+        <p>If you're late-diagnosed neurodivergent, AuDHD, or carry complex trauma, you know this experience: your body learned that discomfort equals danger. And yes, that was true once. Your nervous system was protecting you.</p>
+        
+        <p>But that response is now a fast-moving highway — too automatic, too reactive, too impossible to change while you're on it.</p>
+        
+        <div class="quote">
+            "You can't merge onto a highway going 80mph and expect to turn around. You need a different path entirely."
+        </div>
+        
+        <p>That's what we're building here. New trails. Regulation tools that meet you where you are. Practices rooted in Internal Family Systems (IFS), moon phase wisdom, and neurodivergent-affirming approaches to healing.</p>
+        
+        <p>I'm emjay — your trail guide. Actually Autistic, AuDHD, navigating C-PTSD. I built these tools because I needed them. Now I'm sharing them with you.</p>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources" id="resources">
+        <h3>Tools for Your Journey</h3>
+        <div class="resource-grid">
+            <div class="resource-card">
+                <h4>🎨 Wholeness Bowl</h4>
+                <p>A color-coded system of regulation activities for when you're dysregulated, stuck, or don't know what to do. Pick a card. Try the tool. Build your trail.</p>
+                <a href="#" class="resource-link">Download Free →</a>
+            </div>
+            
+            <div class="resource-card">
+                <h4>🌙 Moon Phase Healing</h4>
+                <p>Work with the lunar cycle for emotional regulation, intention-setting, and release. Printable cards with space for your own reflections, intentions, and inspiration.</p>
+                <a href="#" class="resource-link">Download Free →</a>
+            </div>
+            
+            <div class="resource-card">
+                <h4>📹 YouTube Shorts</h4>
+                <p>Daily regulation tips, IFS practices, relatable neurodivergent moments, and moon phase guidance. Quick, accessible, real.</p>
+                <a href="https://youtube.com/@emergence-project" class="resource-link">Watch Now →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who This Is For -->
+    <section class="for-who">
+        <h3>This Is For You If...</h3>
+        <ul>
+            <li>You've been told to "process your emotions" or "sit with discomfort" and have no idea what that actually means</li>
+            <li>You're late-diagnosed autistic, ADHD, or AuDHD</li>
+            <li>You carry C-PTSD or complex trauma</li>
+            <li>Your nervous system feels like it's constantly in overdrive</li>
+            <li>Traditional therapy hasn't quite worked for you</li>
+            <li>You need practical regulation tools, not just "breathe deeply"</li>
+            <li>You're tired of feeling broken and want approaches that honor how you're wired</li>
+            <li>You're ready to build new trails instead of forcing yourself onto the danger highway</li>
+        </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>© 2026 emjay | The Emergence Project</strong></p>
+        <p>emergence-project.com</p>
+        <p style="font-size: 0.9em; margin-top: 15px;">Built with IFS principles & traditional lunar wisdom</p>
+        <p style="font-size: 0.9em;">For personal use only</p>
+        
+        <div class="social-links">
+            <a href="https://youtube.com/@emergence-project">YouTube</a>
+            <a href="mailto:hello@emergence-project.com">Email</a>
+        </div>
+    </footer>
+</body>
+</html>
