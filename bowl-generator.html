@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Regulation Bowl Generator | The Emergence Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .color-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #f0f0f0;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .color-toggle input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .color-toggle label {
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .helper-text {
+            font-size: 12px;
+            color: #888;
+            margin-top: 8px;
+        }
+        
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .color-section {
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .color-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .color-emoji {
+            font-size: 24px;
+        }
+        
+        .color-info h3 {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+        
+        .color-desc {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .activity-list {
+            margin-bottom: 15px;
+            min-height: 100px;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .activity-item button {
+            background: none;
+            border: none;
+            color: #dc2626;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .activity-item button:hover {
+            color: #991b1b;
+        }
+        
+        .add-activity {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .add-activity input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .add-activity button {
+            padding: 10px 16px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .add-activity button:hover {
+            background: #1d4ed8;
+        }
+        
+        .generate-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .generate-btn {
+            padding: 16px 40px;
+            background: #16a34a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .generate-btn:hover {
+            background: #15803d;
+        }
+        
+        .card-count {
+            margin-top: 12px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .tips {
+            margin-top: 40px;
+            padding: 20px;
+            background: #eff6ff;
+            border-radius: 8px;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .tips h4 {
+            margin-bottom: 12px;
+            color: #1e40af;
+        }
+        
+        .tips ul {
+            margin-left: 20px;
+        }
+        
+        .tips li {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #374151;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #888;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Custom Regulation Bowl Generator</h1>
+            <p class="subtitle">Create your own personalized activity cards</p>
+            
+            <div class="color-toggle">
+                <input type="checkbox" id="showColors" checked>
+                <label for="showColors">Show colour backgrounds (for printing on white paper)</label>
+            </div>
+            <p class="helper-text" id="helperText" style="display: none;">
+                Print on colored paper: green, blue, yellow, orange
+            </p>
+        </div>
+
+        <div class="activities-grid" id="activitiesGrid"></div>
+
+        <div class="generate-section">
+            <button class="generate-btn" onclick="generatePDF()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Generate & Print My Cards
+            </button>
+            <p class="card-count">Total cards: <span id="cardCount">0</span></p>
+        </div>
+
+        <div class="tips">
+            <h4>💡 Tips:</h4>
+            <ul>
+                <li>Add activities that work for YOUR body and YOUR space</li>
+                <li>Keep them simple and quick (5-10 minutes)</li>
+                <li>Make them specific enough that you know exactly what to do</li>
+                <li>You can always print new cards and add them to your bowl later</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            © 2026 emjay | The Emergence Project | emergence-project.com
+        </div>
+    </div>
+
+    <script>
+        const colorInfo = {
+            green: { name: 'Movement', emoji: '🟢', desc: 'Activity, action, movement', bg: '#c8e6c9' },
+            blue: { name: 'Calm', emoji: '🔵', desc: 'Soothing, resting, calming', bg: '#bbdefb' },
+            yellow: { name: 'Productivity', emoji: '🟡', desc: 'Getting things done, completion', bg: '#fff9c4' },
+            orange: { name: 'Creativity', emoji: '🟠', desc: 'Making, learning, exploring', bg: '#ffe0b2' }
+        };
+
+        const activities = {
+            green: ['Walk around the block', 'Do 10 jumping jacks', 'Stretch for 5 minutes'],
+            blue: ['Notice your breathing for 2 minutes', 'Hold an ice cube', 'Splash cold water on face'],
+            yellow: ['Wash 5 dishes', 'Clear off one surface', 'Make your bed'],
+            orange: ['Doodle for 5 minutes', 'Do a crossword puzzle', 'Play Wordle']
+        };
+
+        function renderActivities() {
+            const grid = document.getElementById('activitiesGrid');
+            grid.innerHTML = '';
+
+            Object.entries(colorInfo).forEach(([color, info]) => {
+                const section = document.createElement('div');
+                section.className = 'color-section';
+                section.style.borderColor = info.bg;
+
+                section.innerHTML = `
+                    <div class="color-header">
+                        <span class="color-emoji">${info.emoji}</span>
+                        <div class="color-info">
+                            <h3>${info.name}</h3>
+                            <p class="color-desc">${info.desc}</p>
+                        </div>
+                    </div>
+                    <div class="activity-list" id="${color}-list"></div>
+                    <div class="add-activity">
+                        <input 
+                            type="text" 
+                            id="${color}-input" 
+                            placeholder="Add ${info.name.toLowerCase()} activity..."
+                            onkeypress="if(event.key==='Enter') addActivity('${color}')"
+                        >
+                        <button onclick="addActivity('${color}')">+</button>
+                    </div>
+                `;
+
+                grid.appendChild(section);
+                renderActivityList(color);
+            });
+
+            updateCardCount();
+        }
+
+        function renderActivityList(color) {
+            const list = document.getElementById(`${color}-list`);
+            list.innerHTML = '';
+
+            activities[color].forEach((activity, index) => {
+                const item = document.createElement('div');
+                item.className = 'activity-item';
+                item.style.backgroundColor = colorInfo[color].bg;
+                item.innerHTML = `
+                    <span style="flex: 1">${activity}</span>
+                    <button onclick="removeActivity('${color}', ${index})">✕</button>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function addActivity(color) {
+            const input = document.getElementById(`${color}-input`);
+            const value = input.value.trim();
+            
+            if (value) {
+                activities[color].push(value);
+                input.value = '';
+                renderActivityList(color);
+                updateCardCount();
+            }
+        }
+
+        function removeActivity(color, index) {
+            activities[color].splice(index, 1);
+            renderActivityList(color);
+            updateCardCount();
+        }
+
+        function updateCardCount() {
+            const total = Object.values(activities).reduce((sum, acts) => sum + acts.length, 0);
+            document.getElementById('cardCount').textContent = total;
+        }
+
+        document.getElementById('showColors').addEventListener('change', function() {
+            const helper = document.getElementById('helperText');
+            helper.style.display = this.checked ? 'none' : 'block';
+        });
+
+        function generatePDF() {
+            const showColors = document.getElementById('showColors').checked;
+            
+            const printWindow = window.open('', '_blank');
+            const html = `
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Custom Regulation Bowl Cards</title>
+    <style>
+        @page { size: letter; margin: 0.25in; }
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+        }
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0.25in;
+        }
+        .page {
+            page-break-after: always;
+            margin-bottom: 0.5in;
+        }
+        .page:last-child {
+            page-break-after: auto;
+        }
+        .instructions {
+            text-align: center;
+            margin-bottom: 0.2in;
+            padding: 0.15in;
+            background: #f5f5f5;
+            border: 2px solid #999;
+        }
+        .instructions h2 {
+            margin: 0 0 0.1in 0;
+            font-size: 16px;
+        }
+        .instructions p {
+            margin: 0.05in 0;
+            font-size: 11px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 2.5in);
+            gap: 0.125in;
+        }
+        .card {
+            width: 2.5in;
+            height: 1.5in;
+            border: 2px dashed #666;
+            padding: 0.15in;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+        .footer {
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            margin-top: 0.1in;
+        }
+    </style>
+</head>
+<body>
+${Object.entries(activities).map(([color, acts], pageNum) => `
+    <div class="page">
+        <div class="instructions">
+            <h2>${colorInfo[color].emoji} ${colorInfo[color].name.toUpperCase()} Cards</h2>
+            <p>${showColors ? 'Colour backgrounds included - print on white paper' : `Print on ${color.toUpperCase()} paper or cardstock`}</p>
+            <p>Cut along the dashed lines • Put in your Regulation Bowl</p>
+        </div>
+        <div class="grid">
+            ${acts.map(activity => `
+                <div class="card" style="background-color: ${showColors ? colorInfo[color].bg : 'white'}">
+                    ${activity}
+                </div>
+            `).join('')}
+        </div>
+        <div class="footer">
+            ${colorInfo[color].name} Cards • Page ${pageNum + 1} of 4 • © 2026 emjay | The Emergence Project
+        </div>
+    </div>
+`).join('')}
+</body>
+</html>`;
+            
+            printWindow.document.write(html);
+            printWindow.document.close();
+            
+            setTimeout(() => {
+                printWindow.print();
+            }, 250);
+        }
+
+        // Initialize
+        renderActivities();
+    </script>
+</body>
+</html>
